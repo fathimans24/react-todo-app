@@ -10,13 +10,24 @@ class CheckBox extends Component {
 
     handleChange(e) {
         const {checked} = e.target;
-
-        this.setState({checked});
-        this.props.onChange(checked);
+        const confirmAction = window.confirm('Do you want to mark this task as completed?');
+        
+        if (confirmAction) {
+            this.setState({ checked });
+            this.props.onChange(checked);
+        } else {
+            e.target.checked = this.state.checked;
+        }
     }
 
     render() {
-        return (<input type="checkbox" checked={this.state.checked} onChange={this.handleChange.bind(this)}/>);
+        return (
+            <input 
+                type="checkbox" 
+                checked={this.state.checked} 
+                onChange={this.handleChange.bind(this)}
+            />
+        );
     }
 }
 
